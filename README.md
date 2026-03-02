@@ -1,72 +1,94 @@
 # Tiger-Axolotl
 
-## Game Structure
+## Demo Goal (Phase 1 Foundation)
 
-Roguelite open-world, wuxia-inspired RPG.
+Build a **basic playable demo** that is heavily inspired by *Soul Knight* moment-to-moment gameplay:
+- Fast top-down room combat
+- Clear weapon feel
+- Short runs
+- Repeatable encounters
 
-Inspired by:
-- *Soul Knight* style moment-to-moment gameplay
-- *Slay the Spire* style progression mechanics
-- *Fallout 4* style skill tree design
+This first version is not the full open world. It is a focused combat tutorial slice.
 
-## Art Direction
+## Deployment Target
 
-- Final character sprites: hand-drawn on paper
-- Prototype character visuals: mostly circles
+This demo is planned for **static hosting on GitHub Pages**.
 
-## Character and Progression
+Implications for implementation:
+- Frontend must run as static assets (HTML/CSS/JS and bundled files)
+- No required backend server for core gameplay
+- Game state should be local/session based for the demo phase
 
-- Start with one default character
-- Character stats vary based on selected class/background
-- Character creation menu aims for a *Fallout/Skyrim*-style feel
+## Start of Game: The Trial
 
-### Leveling System
+The game starts with the main character inside a repeatable **Trial**.
 
-- Two primary skill trees:
-  - Sword
-  - Magic
-- Current direction is to keep both trees available rather than locking by class
+Purpose of the Trial:
+- Teach core controls
+- Repeat core actions until they feel natural
+- Establish combat rhythm early
 
-## World Design
+Trial structure:
+1. Movement room
+2. Basic attack room
+3. Dodge/block timing room
+4. Simple enemy room
+5. Mixed enemy room
+6. Mini-boss room
 
-Large fantasy world themed around ancient China.
+If the player fails, they restart the Trial quickly. Repetition is intentional.
 
-- North and west: hyper-hostile regions
-- East: coastal and commerce-focused
-- South: jungle region focused on plants/farming
-- Center: starter village (player spawn area)
+## Core Gameplay Loop (Soul Knight Referenced)
 
-### Camera Behavior
+For this demo, loop is:
+1. Enter room
+2. Doors lock
+3. Clear enemies
+4. Choose reward
+5. Move to next room
 
-- Zoomed out during exploration
-- Zoomed in during encounters
+Room design should stay compact and readable. Combat should be quick and decisive.
 
-## Roguelite Loop
+## Player Setup (Basic)
 
-After completing a run, the player can start a **school**.
+- One default main character
+- One starter weapon: `sword (jian)`
+- Basic actions only:
+  - Move
+  - Light attack combo
+  - Block / defensive action
+  - One simple ability
 
-On new runs, the next character can become that school's disciple to gain benefits. School quality and traits can be influenced by actions from previous runs.
+No class selection yet in this phase.
 
-Potential meta-progression additions:
-- Achievements -> points -> passive/active skills/items
+## Demo Progression (Basic)
 
-## Dynamic World Features
+Use simple run-based upgrades during Trial/demo:
+- Small stat boosts (damage, armor, stamina, mana)
+- One new move unlock after early rooms
+- One reward choice after each cleared room
 
-- Persistent, evolving world state
-- Possible Nemesis-style enemy NPC system (may be too ambitious for prototype scope)
+Keep numbers easy to tune and easy to read.
 
-## Possible Enemies
+## Content Scope for Foundation
 
-- Bilwis and Druden
-- Leshiye
-- Will-o'-the-wisps
-- Nokken
-- Alp-luachras
-- Changelings and doppelgangers
-- Stryzygas
-- Automatons
-- Dragonkin
-- Carbuncles
-- Spirits / elemental entities (nature aspects)
-- Ghosts, bone knights (skeletons), and liches
-- Possessed weapons (flying)
+Include:
+- 1 biome/theme for Trial
+- 6-10 handcrafted rooms
+- 3-5 basic enemy types
+- 1 mini-boss
+- 1 end-of-trial summary screen
+
+Defer for later:
+- Open world map
+- Schools/disciples meta-system
+- Complex world simulation
+- Large narrative systems
+
+## Immediate Build Priorities
+
+1. Lock in Trial flow from spawn to mini-boss.
+2. Make controls and combat feel responsive.
+3. Implement room lock/clear/reward loop.
+4. Hook in current skill tree data as simple unlocks.
+5. Add fast restart to encourage repetition.
