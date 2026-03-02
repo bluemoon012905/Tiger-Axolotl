@@ -1,0 +1,607 @@
+{
+  "tags": [
+    {
+      "id": "tag_0be24903",
+      "name": "Basic",
+      "color": "#0044ff",
+      "visible": false,
+      "rootNodeId": null,
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    },
+    {
+      "id": "tag_10b6da00",
+      "name": "Dao",
+      "color": "#4577ff",
+      "visible": false,
+      "rootNodeId": null,
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    },
+    {
+      "id": "tag_1387e2d9",
+      "name": "Ability",
+      "color": "#ffda00",
+      "visible": false,
+      "rootNodeId": null,
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    },
+    {
+      "id": "tag_1f5c43bb",
+      "name": "Magic",
+      "color": "#ff47f9",
+      "visible": false,
+      "rootNodeId": null,
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    },
+    {
+      "id": "tag_78b0fc64",
+      "name": "weapons",
+      "color": "#242424",
+      "visible": false,
+      "rootNodeId": "node_7f799a9b",
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    },
+    {
+      "id": "tag_886e838f",
+      "name": "Stats boost",
+      "color": "#4577ff",
+      "visible": false,
+      "rootNodeId": null,
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    },
+    {
+      "id": "tag_a2f6d0f1",
+      "name": "Swords",
+      "color": "#4577ff",
+      "visible": false,
+      "rootNodeId": "node_c8161a5a",
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    },
+    {
+      "id": "tag_aa144392",
+      "name": "Skills",
+      "color": "#4577ff",
+      "visible": false,
+      "rootNodeId": null,
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    },
+    {
+      "id": "tag_c037d046",
+      "name": "Armor",
+      "color": "#0036cc",
+      "visible": false,
+      "rootNodeId": null,
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    },
+    {
+      "id": "tag_e025d387",
+      "name": "Ironridge",
+      "color": "#4577ff",
+      "visible": false,
+      "rootNodeId": null,
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "node_0e75876f",
+      "name": "Burst",
+      "tagIds": [
+        "tag_0be24903",
+        "tag_1387e2d9",
+        "tag_a2f6d0f1"
+      ],
+      "stats": {
+        "quantitative": {
+          "Armor": 30,
+          "Damage": 20,
+          "Stamina": 20
+        },
+        "qualitative": {}
+      },
+      "statOrder": [],
+      "description": "when the sword is pulled back like a collapsing movement"
+    },
+    {
+      "id": "node_21a337ca",
+      "name": "Chop",
+      "tagIds": [
+        "tag_0be24903",
+        "tag_1387e2d9"
+      ],
+      "stats": {
+        "quantitative": {
+          "Damage": 40,
+          "Stamina": 10
+        },
+        "qualitative": {}
+      },
+      "statOrder": [],
+      "description": "A basic attack for sword. A downward swing"
+    },
+    {
+      "id": "node_25939de3",
+      "name": "Shifting cliff",
+      "tagIds": [
+        "tag_1387e2d9",
+        "tag_aa144392",
+        "tag_886e838f",
+        "tag_a2f6d0f1",
+        "tag_e025d387"
+      ],
+      "stats": {
+        "quantitative": {
+          "knockback": 5
+        },
+        "qualitative": {}
+      },
+      "statOrder": [
+        "quantitative:knockback"
+      ],
+      "description": "Ironridge basic"
+    },
+    {
+      "id": "node_3d7153d2",
+      "name": "Punch",
+      "tagIds": [
+        "tag_0be24903",
+        "tag_1387e2d9"
+      ],
+      "stats": {
+        "quantitative": {
+          "Damage": 5,
+          "Stamina": 10
+        },
+        "qualitative": {}
+      },
+      "statOrder": [],
+      "description": "a basic ability given to everyone "
+    },
+    {
+      "id": "node_3ee685ab",
+      "name": "Sword basic",
+      "tagIds": [
+        "tag_a2f6d0f1",
+        "tag_aa144392"
+      ],
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      },
+      "statOrder": [],
+      "description": "basic skill that allows the user to chain attacks with the basic sword actions\nrecognized chains: \nstab -> burst\nburst -> chop\nchop -> stab\nchop -> hang\nhang -> flick\nflick -> chop"
+    },
+    {
+      "id": "node_52d534de",
+      "name": "Quake",
+      "tagIds": [
+        "tag_e025d387",
+        "tag_a2f6d0f1",
+        "tag_1387e2d9",
+        "tag_1f5c43bb"
+      ],
+      "stats": {
+        "quantitative": {
+          "Damage": 40,
+          "Mana": 40,
+          "Stamina": 30
+        },
+        "qualitative": {}
+      },
+      "statOrder": [
+        "quantitative:Damage",
+        "quantitative:Mana",
+        "quantitative:Stamina"
+      ],
+      "description": "Ironridge basic AOE damage"
+    },
+    {
+      "id": "node_54a394e8",
+      "name": "Strata reading ",
+      "tagIds": [
+        "tag_1387e2d9",
+        "tag_a2f6d0f1",
+        "tag_e025d387",
+        "tag_1f5c43bb"
+      ],
+      "stats": {
+        "quantitative": {
+          "damage scaling": 5,
+          "Mana": 20
+        },
+        "qualitative": {}
+      },
+      "statOrder": [
+        "quantitative:Mana",
+        "quantitative:damage scaling"
+      ],
+      "description": "Ironridge basic\nReads the weakness of the opponent, once cast upon the player deal more damage towards the enemy. "
+    },
+    {
+      "id": "node_7f799a9b",
+      "name": "Weapons",
+      "tagIds": [
+        "tag_78b0fc64"
+      ],
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      },
+      "statOrder": [],
+      "description": ""
+    },
+    {
+      "id": "node_a21e934a",
+      "name": "Stab",
+      "tagIds": [
+        "tag_0be24903",
+        "tag_1387e2d9",
+        "tag_a2f6d0f1"
+      ],
+      "stats": {
+        "quantitative": {
+          "Damage": 30,
+          "Stamina": 5
+        },
+        "qualitative": {}
+      },
+      "statOrder": [],
+      "description": "a simple thrust forward"
+    },
+    {
+      "id": "node_a5199ed7",
+      "name": "Raising cliff",
+      "tagIds": [
+        "tag_1387e2d9",
+        "tag_a2f6d0f1",
+        "tag_1f5c43bb",
+        "tag_e025d387"
+      ],
+      "stats": {
+        "quantitative": {
+          "Armor": 100,
+          "Mana": 30,
+          "Stamina": 30
+        },
+        "qualitative": {}
+      },
+      "statOrder": [
+        "quantitative:Stamina",
+        "quantitative:Mana",
+        "quantitative:Armor"
+      ],
+      "description": "Ironridge basic\ncalls upon a rock that persists"
+    },
+    {
+      "id": "node_c8161a5a",
+      "name": "sword(Jian)",
+      "tagIds": [
+        "tag_78b0fc64",
+        "tag_a2f6d0f1"
+      ],
+      "stats": {
+        "quantitative": {},
+        "qualitative": {}
+      },
+      "statOrder": [],
+      "description": "A basic weapon type"
+    },
+    {
+      "id": "node_e1aae1d9",
+      "name": "Splitting rocks",
+      "tagIds": [
+        "tag_1387e2d9",
+        "tag_a2f6d0f1",
+        "tag_e025d387",
+        "tag_1f5c43bb"
+      ],
+      "stats": {
+        "quantitative": {
+          "Damage": 80,
+          "Mana": 20,
+          "Stamina": 20
+        },
+        "qualitative": {}
+      },
+      "statOrder": [
+        "quantitative:Stamina",
+        "quantitative:Mana",
+        "quantitative:Damage"
+      ],
+      "description": "Ironridge basic tier 1 attack. \nmimics the way rocks splits"
+    },
+    {
+      "id": "node_f7a8e159",
+      "name": "Hang",
+      "tagIds": [
+        "tag_0be24903",
+        "tag_1387e2d9",
+        "tag_a2f6d0f1"
+      ],
+      "stats": {
+        "quantitative": {
+          "Armor": 40,
+          "Stamina": 15
+        },
+        "qualitative": {}
+      },
+      "statOrder": [],
+      "description": "A basic block"
+    },
+    {
+      "id": "node_f8792808",
+      "name": "Flick",
+      "tagIds": [
+        "tag_0be24903",
+        "tag_1387e2d9",
+        "tag_a2f6d0f1"
+      ],
+      "stats": {
+        "quantitative": {
+          "Damage": 35,
+          "Stamina": 10
+        },
+        "qualitative": {}
+      },
+      "statOrder": [],
+      "description": "A upward swing"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge_042688b1",
+      "from": "node_c8161a5a",
+      "to": "node_7f799a9b",
+      "type": "previous"
+    },
+    {
+      "id": "edge_0478555d",
+      "from": "node_21a337ca",
+      "to": "node_c8161a5a",
+      "type": "previous"
+    },
+    {
+      "id": "edge_08adffe2",
+      "from": "node_a21e934a",
+      "to": "node_c8161a5a",
+      "type": "previous"
+    },
+    {
+      "id": "edge_44c3a0a8",
+      "from": "node_54a394e8",
+      "to": "node_21a337ca",
+      "type": "previous"
+    },
+    {
+      "id": "edge_9b709dde",
+      "from": "node_a5199ed7",
+      "to": "node_f7a8e159",
+      "type": "previous"
+    },
+    {
+      "id": "edge_a131f06d",
+      "from": "node_0e75876f",
+      "to": "node_c8161a5a",
+      "type": "previous"
+    },
+    {
+      "id": "edge_a5edff95",
+      "from": "node_e1aae1d9",
+      "to": "node_21a337ca",
+      "type": "previous"
+    },
+    {
+      "id": "edge_b1ffe140",
+      "from": "node_52d534de",
+      "to": "node_0e75876f",
+      "type": "previous"
+    },
+    {
+      "id": "edge_ba043fd8",
+      "from": "node_a5199ed7",
+      "to": "node_f8792808",
+      "type": "previous"
+    },
+    {
+      "id": "edge_c4848904",
+      "from": "node_3ee685ab",
+      "to": "node_c8161a5a",
+      "type": "previous"
+    },
+    {
+      "id": "edge_dc7542e2",
+      "from": "node_25939de3",
+      "to": "node_a21e934a",
+      "type": "previous"
+    },
+    {
+      "id": "edge_e8f608c0",
+      "from": "node_f8792808",
+      "to": "node_c8161a5a",
+      "type": "previous"
+    },
+    {
+      "id": "edge_ee0440a6",
+      "from": "node_3ee685ab",
+      "to": "node_25939de3",
+      "type": "next"
+    },
+    {
+      "id": "edge_fefc5956",
+      "from": "node_f7a8e159",
+      "to": "node_c8161a5a",
+      "type": "previous"
+    }
+  ],
+  "statStyles": [
+    {
+      "id": "style_322027ee",
+      "key": "speed",
+      "kind": "quantitative",
+      "color": "#696b00"
+    },
+    {
+      "id": "style_48f1bfb3",
+      "key": "Armor",
+      "kind": "quantitative",
+      "color": "#2d5dbe"
+    },
+    {
+      "id": "style_5aff118b",
+      "key": "Mana reg",
+      "kind": "quantitative",
+      "color": "#003db8"
+    },
+    {
+      "id": "style_6c1e9b75",
+      "key": "Damage",
+      "kind": "quantitative",
+      "color": "#d6002b"
+    },
+    {
+      "id": "style_829fc3e6",
+      "key": "reload time",
+      "kind": "quantitative",
+      "color": "#9fb2d9"
+    },
+    {
+      "id": "style_a709c373",
+      "key": "Stamina",
+      "kind": "quantitative",
+      "color": "#9fb2d9"
+    },
+    {
+      "id": "style_addbb072",
+      "key": "Stamina reg",
+      "kind": "quantitative",
+      "color": "#9fb2d9"
+    },
+    {
+      "id": "style_c6782ce2",
+      "key": "cast time",
+      "kind": "quantitative",
+      "color": "#9fb2d9"
+    },
+    {
+      "id": "style_c748ce3a",
+      "key": "knockback",
+      "kind": "quantitative",
+      "color": "#9fb2d9"
+    },
+    {
+      "id": "style_cd4ca4d4",
+      "key": "Mana",
+      "kind": "quantitative",
+      "color": "#5281e0"
+    },
+    {
+      "id": "style_e52318a8",
+      "key": "damage scaling",
+      "kind": "quantitative",
+      "color": "#9fb2d9"
+    }
+  ],
+  "viewState": {
+    "viewport": {
+      "scale": 1.0557242313085786,
+      "tx": -69.70459121350302,
+      "ty": -119.42804819703667
+    },
+    "manualNodePositions": {
+      "node_0e75876f": {
+        "x": 375.19175278889213,
+        "y": 438.23858462229725
+      },
+      "node_21a337ca": {
+        "x": 676.4534874623001,
+        "y": 431.69772239592623
+      },
+      "node_25939de3": {
+        "x": 601.0964177679077,
+        "y": 337.78660743732667
+      },
+      "node_3d7153d2": {
+        "x": 485.3377852291453,
+        "y": 593.1108255845268
+      },
+      "node_3ee685ab": {
+        "x": 307.3507171935749,
+        "y": 443.32285869300523
+      },
+      "node_52d534de": {
+        "x": 379.9119354311057,
+        "y": 352.7586498630992
+      },
+      "node_54a394e8": {
+        "x": 680.8552800170224,
+        "y": 334.45948689826656
+      },
+      "node_64a55155": {
+        "x": 161.76699886818088,
+        "y": 286.9851605180938
+      },
+      "node_7f799a9b": {
+        "x": 375.8052204679092,
+        "y": 566.8358220596414
+      },
+      "node_a21e934a": {
+        "x": 592.2392716067816,
+        "y": 430.50930786774126
+      },
+      "node_a5199ed7": {
+        "x": 480.8130628285494,
+        "y": 356.08577040215977
+      },
+      "node_c8161a5a": {
+        "x": 459.03552549743506,
+        "y": 523.8318649764326
+      },
+      "node_d231168c": {
+        "x": 199.54877502682484,
+        "y": 426.97861507225093
+      },
+      "node_e1aae1d9": {
+        "x": 779.4015276176034,
+        "y": 341.2933933630148
+      },
+      "node_f7a8e159": {
+        "x": 453.3268837464824,
+        "y": 428.89892333389986
+      },
+      "node_f8792808": {
+        "x": 519.7487219580995,
+        "y": 425.3794270800675
+      }
+    },
+    "showRootNodesOnly": false
+  }
+}
