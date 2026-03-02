@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiger-Axolotl Trial Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="hud">
+        <h1>Tiger-Axolotl: Trial Demo</h1>
+        <p id="tutorial-text">Loading tutorial...</p>
+        <p class="controls">Move: <strong>WASD</strong> | Attacks: <strong>J K L ; '</strong> | Inventory: <strong>I</strong></p>
+        <p id="player-stats"></p>
+      </section>
+
+      <section class="arena-wrap">
+        <canvas id="game" width="960" height="540"></canvas>
+      </section>
+
+      <aside id="inventory" class="inventory hidden" aria-live="polite">
+        <h2>Inventory</h2>
+        <div id="inventory-body"></div>
+      </aside>
+    </main>
+
+    <script src="main.js" type="module"></script>
+  </body>
+</html>

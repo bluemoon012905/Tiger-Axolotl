@@ -58,8 +58,28 @@ Room design should stay compact and readable. Combat should be quick and decisiv
   - Light attack combo
   - Block / defensive action
   - One simple ability
+- Prototype visuals:
+  - Main character: blue circle
+  - Friendly NPCs: green circles
+  - Enemies: red circles
+  - Hit checks: circle-based collision
 
 No class selection yet in this phase.
+
+## Input and Inventory (Current Prototype)
+
+- Movement: `W A S D`
+- Attack slots: `J K L ; '`
+- Inventory toggle: `I`
+
+Inventory structure:
+- 1 armor slot
+- 1 weapon slot
+- 5 attack slots (bound to `J K L ; '`)
+
+Skill setup:
+- Main character starts with basic attacks unlocked (from skill tree)
+- During the Trial tutorial, player is granted `Sword basic`
 
 ## Demo Progression (Basic)
 
