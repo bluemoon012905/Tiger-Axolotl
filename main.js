@@ -27,6 +27,8 @@ const state = {
     swordBasicGiven: false,
   },
   skillTree: null,
+  uiMessage: "",
+  uiMessageTimer: 0,
 };
 
 const player = {
@@ -37,10 +39,17 @@ const player = {
   speed: 220,
   hp: 100,
   maxHp: 100,
+  stamina: 100,
+  maxStamina: 100,
+  staminaRegen: 24,
+  mana: 50,
+  maxMana: 50,
+  manaRegen: 9,
   armor: 10,
   weapon: "sword(Jian)",
   invulnTimer: 0,
   blockTimer: 0,
+  attackCooldown: 0,
   facingX: 1,
   facingY: 0,
   inventory: {
@@ -151,18 +160,49 @@ function getAttackNode(name) {
   return state.skillTree.byName.get(name.trim().toLowerCase()) || null;
 }
 
+function setUiMessage(text, seconds = 1) {
+  state.uiMessage = text;
+  state.uiMessageTimer = seconds;
+}
+
+function attackCosts(node) {
+  return {
+    stamina: Math.max(0, statNumber(node, "Stamina", 0)),
+    mana: Math.max(0, statNumber(node, "Mana", 0)),
+  };
+}
+
 function performAttack(slotIndex) {
   const attackName = player.inventory.attackSlots[slotIndex];
   if (!attackName) {
+    setUiMessage(`Slot ${ATTACK_KEYS[slotIndex].toUpperCase()} is empty.`);
     return;
   }
 
   const node = getAttackNode(attackName);
+  const costs = attackCosts(node);
   const damage = Math.max(8, statNumber(node, "Damage", 0));
   const armorBoost = statNumber(node, "Armor", 0);
 
+  if (player.attackCooldown > 0) {
+    return;
+  }
+
+  if (player.stamina < costs.stamina) {
+    setUiMessage(`Not enough stamina for ${attackName}.`);
+    return;
+  }
+  if (player.mana < costs.mana) {
+    setUiMessage(`Not enough mana for ${attackName}.`);
+    return;
+  }
+
+  player.stamina -= costs.stamina;
+  player.mana -= costs.mana;
+  player.attackCooldown = 0.12;
+
   if (armorBoost > 0 && damage <= 8) {
-    player.blockTimer = Math.max(player.blockTimer, 0.35);
+    player.blockTimer = Math.max(player.blockTimer, 0.35 + armorBoost / 300);
   }
 
   const facing = normalize(player.facingX, player.facingY);
@@ -186,7 +226,7 @@ function updateTutorial() {
       state.tutorial.step = 1;
     }
   } else if (state.tutorial.step === 1) {
-    tutorialText.textContent = "Trial 2/3: Use attacks with J K L ; '.";
+    tutorialText.textContent = "Trial 2/3: Use attacks with J K L ; '. Attacks spend stamina/mana.";
     if (state.tutorial.usedAttack) {
       state.tutorial.step = 2;
     }
@@ -219,11 +259,21 @@ function updatePlayer(dt) {
     state.tutorial.moved = true;
   }
 
+  const moving = dx !== 0 || dy !== 0;
+  const staminaRegenFactor = moving ? 0.45 : 1;
+  player.stamina = clamp(player.stamina + player.staminaRegen * staminaRegenFactor * dt, 0, player.maxStamina);
+  player.mana = clamp(player.mana + player.manaRegen * dt, 0, player.maxMana);
+
   player.x = clamp(player.x, player.r, ARENA.width - player.r);
   player.y = clamp(player.y, player.r, ARENA.height - player.r);
 
   player.invulnTimer = Math.max(0, player.invulnTimer - dt);
   player.blockTimer = Math.max(0, player.blockTimer - dt);
+  player.attackCooldown = Math.max(0, player.attackCooldown - dt);
+  state.uiMessageTimer = Math.max(0, state.uiMessageTimer - dt);
+  if (state.uiMessageTimer === 0) {
+    state.uiMessage = "";
+  }
 
   ATTACK_KEYS.forEach((key, idx) => {
     if (state.justPressed.has(key)) {
@@ -274,6 +324,8 @@ function updateEnemies(dt) {
 
   if (player.hp <= 0) {
     player.hp = player.maxHp;
+    player.stamina = player.maxStamina;
+    player.mana = player.maxMana;
     player.x = 180;
     player.y = 260;
     state.tutorial.step = 0;
@@ -329,6 +381,16 @@ function drawArena() {
     ctx.lineWidth = 2;
     ctx.stroke();
   }
+
+  if (state.uiMessage) {
+    ctx.fillStyle = "rgba(4, 10, 18, 0.78)";
+    ctx.fillRect(20, ARENA.height - 56, 430, 34);
+    ctx.strokeStyle = "#2f4f7d";
+    ctx.strokeRect(20, ARENA.height - 56, 430, 34);
+    ctx.fillStyle = "#d7e5ff";
+    ctx.font = "14px sans-serif";
+    ctx.fillText(state.uiMessage, 30, ARENA.height - 34);
+  }
 }
 
 function updateInventoryPanel() {
@@ -339,7 +401,14 @@ function updateInventoryPanel() {
   }
 
   const slotRows = player.inventory.attackSlots
-    .map((name, idx) => `<li>${ATTACK_KEYS[idx].toUpperCase()}: ${name ?? "Empty"}</li>`)
+    .map((name, idx) => {
+      if (!name) {
+        return `<li>${ATTACK_KEYS[idx].toUpperCase()}: Empty</li>`;
+      }
+      const node = getAttackNode(name);
+      const costs = attackCosts(node);
+      return `<li>${ATTACK_KEYS[idx].toUpperCase()}: ${name} (STA ${costs.stamina}, MANA ${costs.mana})</li>`;
+    })
     .join("");
 
   const unlockedAttacks = [...player.inventory.unlockedAttacks]
@@ -355,6 +424,7 @@ function updateInventoryPanel() {
   inventoryBody.innerHTML = `
     <p><strong>Armor:</strong> Training Armor (${player.armor})</p>
     <p><strong>Weapon:</strong> ${player.weapon}</p>
+    <p><strong>Resources:</strong> HP ${Math.ceil(player.hp)}/${player.maxHp}, STA ${Math.ceil(player.stamina)}/${player.maxStamina}, MANA ${Math.ceil(player.mana)}/${player.maxMana}</p>
     <p><strong>Attack Slots (5):</strong></p>
     <ul>${slotRows}</ul>
     <p><strong>Unlocked Basic Attacks:</strong></p>
@@ -363,7 +433,7 @@ function updateInventoryPanel() {
     <ul>${unlockedSkills || "<li>None</li>"}</ul>
   `;
 
-  playerStats.textContent = `HP ${Math.ceil(player.hp)}/${player.maxHp} | Enemies ${state.enemies.length}`;
+  playerStats.textContent = `HP ${Math.ceil(player.hp)}/${player.maxHp} | STA ${Math.ceil(player.stamina)}/${player.maxStamina} | MANA ${Math.ceil(player.mana)}/${player.maxMana} | Enemies ${state.enemies.length}`;
 }
 
 function loop(time) {
