@@ -1,0 +1,73 @@
+@startuml
+title Tiger-Axolotl High-Level Structure
+
+skinparam backgroundColor transparent
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+
+actor Player
+
+rectangle "Static Web App" {
+  package "Presentation Layer" {
+    [index.html]
+    [styles.css]
+  }
+
+  package "Application Layer" {
+    [src/main.js]
+  }
+
+  package "Validation Layer" {
+    [src/decoders/playerDecoder.js]
+    [src/decoders/roomDecoder.js]
+  }
+
+  package "Runtime Layer" {
+    [src/runtime/loadJson.js]
+    [src/runtime/entityFactory.js]
+    [src/runtime/renderScene.js]
+  }
+
+  package "Content Layer" {
+    [data/actors/player_basic.json]
+    [data/rooms/trial_room_01.json]
+  }
+
+  package "Assets" {
+    [assets/images/backgrounds/starting-screen.png]
+  }
+
+  package "Documentation" {
+    [Doc/README.md]
+    [Doc/ARCHITECTURE.md]
+    [Doc/MILESTONE-2026-03-02.md]
+    [Doc/player_basic.md]
+  }
+}
+
+Player --> [index.html] : opens app
+[index.html] --> [styles.css] : loads styles
+[index.html] --> [src/main.js] : loads module
+[styles.css] --> [assets/images/backgrounds/starting-screen.png] : uses background art
+
+[src/main.js] --> [src/runtime/loadJson.js] : fetch JSON
+[src/runtime/loadJson.js] --> [data/actors/player_basic.json]
+[src/runtime/loadJson.js] --> [data/rooms/trial_room_01.json]
+
+[src/main.js] --> [src/decoders/playerDecoder.js] : validate player data
+[src/main.js] --> [src/decoders/roomDecoder.js] : validate room data
+[src/main.js] --> [src/runtime/entityFactory.js] : build runtime entities
+[src/main.js] --> [src/runtime/renderScene.js] : draw tutorial room
+
+[Doc/README.md] ..> [src/main.js] : describes boot flow
+[Doc/ARCHITECTURE.md] ..> [src/decoders/playerDecoder.js] : documents pipeline
+[Doc/ARCHITECTURE.md] ..> [src/runtime/entityFactory.js]
+
+note bottom of [src/main.js]
+Current live flow:
+title -> gateway -> tutorial
+load/export are placeholders
+end note
+
+@enduml

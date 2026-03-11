@@ -1,0 +1,193 @@
+@startuml
+title Tiger-Axolotl Low-Level Component Structure
+
+skinparam backgroundColor transparent
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+
+package "UI Shell" {
+  component "index.html" as index
+  component "styles.css" as css
+
+  rectangle "HTML Screens" {
+    component "screen-title" as screen_title
+    component "screen-start" as screen_start
+    component "screen-load" as screen_load
+    component "screen-export" as screen_export
+    component "screen-tutorial" as screen_tutorial
+  }
+
+  rectangle "DOM Nodes" {
+    component "#status" as dom_status
+    component "#summary" as dom_summary
+    component "#stage <canvas>" as dom_stage
+    component "[data-action] buttons" as dom_actions
+  }
+}
+
+package "Boot + Screen Control" {
+  component "src/main.js" as main {
+    [bootstrap()]
+    [bindUi()]
+    [showScreen(screenId)]
+    [loadTutorial()]
+    [renderSummary(rows)]
+    [screens config]
+  }
+}
+
+package "Runtime Support" {
+  component "src/runtime/loadJson.js" as load_json {
+    [loadJson(path)]
+  }
+
+  component "src/runtime/entityFactory.js" as entity_factory {
+    [createEntityFactory()]
+    [createBaseEntity(...)]
+    [createPlayer(definition)]
+    [createEnemy(definition)]
+  }
+
+  component "src/runtime/renderScene.js" as render_scene {
+    [renderScene(context, roomDefinition, player, enemies)]
+    [drawEntity(context, entity)]
+  }
+}
+
+package "Decoders" {
+  component "src/decoders/playerDecoder.js" as player_decoder {
+    [decodePlayerDefinition(raw)]
+    [decodeLoadout(raw, path)]
+    [decodeStats(raw, path)]
+    [readVector(raw, path)]
+    [readStringArray(raw, path)]
+    [readString(value, path)]
+    [readNumber(value, path)]
+    [assertObject(value, path)]
+  }
+
+  component "src/decoders/roomDecoder.js" as room_decoder {
+    [decodeRoomDefinition(raw)]
+    [readEnemyList(raw, path)]
+    [decodeEnemyDefinition(raw, path)]
+    [readBounds(raw, path)]
+    [decodeStats(raw, path)]
+    [readVector(raw, path)]
+    [readString(value, path)]
+    [readNumber(value, path)]
+    [assertObject(value, path)]
+  }
+}
+
+package "Static Data" {
+  file "data/actors/player_basic.json" as player_json
+  file "data/rooms/trial_room_01.json" as room_json
+
+  note right of player_json
+  Fields:
+  - id
+  - name
+  - spawn.x / spawn.y
+  - stats.health
+  - stats.stamina
+  - stats.mana
+  - stats.speed
+  - loadout.weapon
+  - loadout.attacks[]
+  end note
+
+  note right of room_json
+  Fields:
+  - id
+  - name
+  - objective
+  - bounds.x / y / width / height
+  - enemies[].id
+  - enemies[].archetype
+  - enemies[].spawn.x / y
+  - enemies[].stats.health
+  - enemies[].stats.damage
+  - enemies[].stats.speed
+  end note
+}
+
+package "Runtime Objects" {
+  entity "player entity" as runtime_player
+  entity "enemy entities[]" as runtime_enemies
+  entity "2D drawing context" as canvas_context
+}
+
+package "Assets + Docs" {
+  file "assets/images/backgrounds/starting-screen.png" as bg_image
+  file "Doc/README.md" as doc_readme
+  file "Doc/ARCHITECTURE.md" as doc_arch
+}
+
+index --> css : load stylesheet
+index --> main : load ES module
+css --> bg_image : title background
+
+index --> screen_title
+index --> screen_start
+index --> screen_load
+index --> screen_export
+index --> screen_tutorial
+index --> dom_status
+index --> dom_summary
+index --> dom_stage
+index --> dom_actions
+
+main --> dom_actions : query + bind click handlers
+main --> dom_status : set textContent
+main --> dom_summary : set innerHTML
+main --> dom_stage : getContext("2d")
+main --> screen_title : toggle active state
+main --> screen_start : toggle active state
+main --> screen_load : toggle active state
+main --> screen_export : toggle active state
+main --> screen_tutorial : toggle active state
+
+main --> load_json : during loadTutorial()
+load_json --> player_json : fetch("./data/actors/player_basic.json")
+load_json --> room_json : fetch("./data/rooms/trial_room_01.json")
+
+main --> player_decoder : decode playerRaw
+main --> room_decoder : decode roomRaw
+
+player_decoder --> entity_factory : trusted player definition
+room_decoder --> entity_factory : trusted enemy definitions
+entity_factory --> runtime_player : createPlayer()
+entity_factory --> runtime_enemies : createEnemy()
+
+main --> render_scene : render tutorial scene
+main --> canvas_context : supplies context
+main --> runtime_player : supplies player
+main --> runtime_enemies : supplies enemies
+room_decoder --> render_scene : supplies roomDefinition
+render_scene --> canvas_context : clear + fill + stroke + arc
+
+doc_readme ..> main : describes flow
+doc_arch ..> player_decoder : documents decoder layer
+doc_arch ..> entity_factory : documents runtime factory layer
+doc_arch ..> load_json : documents static-hosted JSON loading
+
+note bottom of main
+Screen actions:
+- open-start
+- open-tutorial
+- open-load
+- open-export
+- back-title
+- back-start
+end note
+
+note bottom of render_scene
+Current renderer only draws:
+- room bounds
+- player circle
+- enemy circles
+No update loop or input system yet
+end note
+
+@enduml

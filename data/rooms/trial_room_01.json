@@ -1,0 +1,39 @@
+{
+  "id": "trial-room-01",
+  "name": "Trial Entry",
+  "objective": "Clear the room",
+  "bounds": {
+    "x": 80,
+    "y": 80,
+    "width": 800,
+    "height": 380
+  },
+  "enemies": [
+    {
+      "id": "enemy-scout-01",
+      "archetype": "scout",
+      "spawn": {
+        "x": 650,
+        "y": 200
+      },
+      "stats": {
+        "health": 30,
+        "damage": 8,
+        "speed": 3
+      }
+    },
+    {
+      "id": "enemy-scout-02",
+      "archetype": "scout",
+      "spawn": {
+        "x": 740,
+        "y": 330
+      },
+      "stats": {
+        "health": 30,
+        "damage": 8,
+        "speed": 3
+      }
+    }
+  ]
+}

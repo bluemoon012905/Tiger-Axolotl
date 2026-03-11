@@ -1,30 +1,125 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tiger-Axolotl Trial Demo</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="app">
-      <section class="hud">
-        <h1>Tiger-Axolotl: Trial Demo</h1>
-        <p id="tutorial-text">Loading tutorial...</p>
-        <p class="controls">Move: <strong>WASD</strong> | Attacks: <strong>J K L ; '</strong> | Inventory: <strong>I</strong></p>
-        <p id="player-stats"></p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiger-Axolotl</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+  >
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="layout">
+    <section class="stage-wrap">
+      <section id="screen-start" class="screen screen-active" aria-label="Start screen">
+        <div class="screen-card title-screen start-screen">
+          <div class="menu-stack">
+            <button type="button" class="menu-card" data-action="open-new-game">
+              <span class="menu-card-title">New Game</span>
+              <span class="menu-card-copy">Start the main game flow once it is implemented.</span>
+            </button>
+            <button type="button" class="menu-card" data-action="open-tutorial">
+              <span class="menu-card-title">Tutorial</span>
+              <span class="menu-card-copy">Open the current tutorial implementation workspace.</span>
+            </button>
+            <button type="button" class="menu-card" data-action="open-load">
+              <span class="menu-card-title">Load Game</span>
+              <span class="menu-card-copy">Resume from a saved slot later.</span>
+            </button>
+            <button type="button" class="menu-card" data-action="open-export">
+              <span class="menu-card-title">Export Saves</span>
+              <span class="menu-card-copy">Back up local data when that flow is added.</span>
+            </button>
+          </div>
+          <div class="subtle-row">
+            <button type="button" class="ghost-button" data-action="toggle-fullscreen">
+              Full Screen
+            </button>
+          </div>
+        </div>
       </section>
 
-      <section class="arena-wrap">
-        <canvas id="game" width="960" height="540"></canvas>
+      <section id="screen-new-game" class="screen" aria-label="New game screen">
+        <div class="screen-card">
+          <p class="screen-kicker">New Run</p>
+          <h2>New Game</h2>
+          <p>
+            This will become the main run start flow. For now, the separate tutorial path is where
+            the active gameplay implementation lives.
+          </p>
+          <div class="mock-list">
+            <div class="mock-item">Main progression setup: pending</div>
+            <div class="mock-item">Run opener and intro state: pending</div>
+            <div class="mock-item">Use Tutorial for the current playable slice</div>
+          </div>
+          <div class="subtle-row">
+            <button type="button" class="ghost-button" data-action="open-tutorial">Open Tutorial</button>
+            <button type="button" class="ghost-button" data-action="back-start">Back</button>
+          </div>
+        </div>
       </section>
 
-      <aside id="inventory" class="inventory hidden" aria-live="polite">
-        <h2>Inventory</h2>
-        <div id="inventory-body"></div>
-      </aside>
-    </main>
+      <section id="screen-load" class="screen" aria-label="Load game screen">
+        <div class="screen-card">
+          <p class="screen-kicker">Load Archive</p>
+          <h2>Load Game</h2>
+          <p>
+            Placeholder interface. Later this should show actual slots, timestamps, zone names,
+            and playtime.
+          </p>
+          <div class="mock-list">
+            <div class="mock-item">Slot A: Empty</div>
+            <div class="mock-item">Slot B: Empty</div>
+            <div class="mock-item">Slot C: Empty</div>
+          </div>
+          <div class="subtle-row">
+            <button type="button" class="ghost-button" data-action="back-start">Back</button>
+          </div>
+        </div>
+      </section>
 
-    <script src="main.js" type="module"></script>
-  </body>
+      <section id="screen-export" class="screen" aria-label="Export saves screen">
+        <div class="screen-card">
+          <p class="screen-kicker">Records Office</p>
+          <h2>Export Saves</h2>
+          <p>
+            Placeholder interface. Later this can export one slot, all slots, or copy a save
+            payload for transfer.
+          </p>
+          <div class="mock-list">
+            <div class="mock-item">Export current slot</div>
+            <div class="mock-item">Export all local saves</div>
+            <div class="mock-item">Copy save payload</div>
+          </div>
+          <div class="subtle-row">
+            <button type="button" class="ghost-button" data-action="back-start">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-tutorial" class="screen" aria-label="Tutorial screen">
+        <div class="tutorial-frame">
+          <div class="tutorial-topbar">
+            <div class="tutorial-meta">
+              <span class="tutorial-chip">Tutorial Active</span>
+              <span class="tutorial-chip tutorial-chip-muted">Room Prototype</span>
+            </div>
+            <div class="tutorial-actions">
+              <button type="button" class="ghost-button" data-action="toggle-fullscreen">
+                Full Screen
+              </button>
+              <button type="button" class="ghost-button" data-action="back-start">Exit Tutorial</button>
+            </div>
+          </div>
+          <canvas id="stage" width="960" height="540" aria-label="Game stage"></canvas>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
 </html>

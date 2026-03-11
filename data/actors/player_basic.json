@@ -1,0 +1,20 @@
+{
+  "id": "player-human-basic",
+  "name": "Trial Initiate",
+  "spawn": {
+    "x": 180,
+    "y": 270
+  },
+  "stats": {
+    "health": 100,
+    "stamina": 200,
+    "mana": 100,
+    "speed": 5
+  },
+  "loadout": {
+    "weapon": "sword-jian",
+    "attacks": [
+      "sword-basic"
+    ]
+  }
+}

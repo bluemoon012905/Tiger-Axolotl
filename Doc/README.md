@@ -1,5 +1,36 @@
 # Tiger-Axolotl
 
+## Current Structure
+
+Current repo shape:
+
+- `index.html`
+  - Static entry page
+- `styles.css`
+  - Basic presentation for the prototype shell
+- `src/main.js`
+  - Boot flow for loading definitions, decoding them, creating entities, and rendering
+- `src/decoders/`
+  - Validates raw JSON content before runtime uses it
+- `src/runtime/`
+  - Factories and runtime helpers for live game state
+- `data/actors/`
+  - Static actor definitions
+- `data/rooms/`
+  - Static room definitions
+- `Doc/`
+  - Project documentation and milestone notes
+
+Runtime flow:
+
+1. `index.html` loads `src/main.js`
+2. `src/main.js` fetches JSON from `data/`
+3. `src/decoders/` validates the raw content
+4. `src/runtime/entityFactory.js` creates mutable runtime entities
+5. renderer/runtime helpers draw the current scene
+
+This structure is intended for static hosting. The browser runs the game logic, and the host only serves files.
+
 ## Demo Goal (Phase 1 Foundation)
 
 Build a **basic playable demo** that is heavily inspired by *Soul Knight* moment-to-moment gameplay:
@@ -18,6 +49,10 @@ Implications for implementation:
 - Frontend must run as static assets (HTML/CSS/JS and bundled files)
 - No required backend server for core gameplay
 - Game state should be local/session based for the demo phase
+- Static content definitions can live as JSON and be loaded in-browser
+- Recommended architecture: `data/` -> `decoders/` -> `factories/runtime/`
+
+See [ARCHITECTURE.md](/home/moonbox/personal_project/Tiger-Axolotl/Doc/ARCHITECTURE.md) for the current project shape.
 
 ## Start of Game: The Trial
 
