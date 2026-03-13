@@ -1,0 +1,26 @@
+{
+  "id": "trial-room-02",
+  "name": "Ranged Trial",
+  "objective": "Close the gap on the bow golem while avoiding incoming shots.",
+  "bounds": {
+    "x": 80,
+    "y": 80,
+    "width": 800,
+    "height": 380
+  },
+  "enemies": [
+    {
+      "id": "enemy-bow-01",
+      "archetype": "bow",
+      "spawn": {
+        "x": 720,
+        "y": 200
+      },
+      "stats": {
+        "health": 90,
+        "damage": 8,
+        "speed": 2.8
+      }
+    }
+  ]
+}

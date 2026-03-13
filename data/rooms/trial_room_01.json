@@ -1,7 +1,7 @@
 {
   "id": "trial-room-01",
-  "name": "Trial Entry",
-  "objective": "Clear the room",
+  "name": "Melee Trial",
+  "objective": "Defeat the spear golem and learn close-range spacing.",
   "bounds": {
     "x": 80,
     "y": 80,
@@ -10,29 +10,16 @@
   },
   "enemies": [
     {
-      "id": "enemy-scout-01",
-      "archetype": "scout",
+      "id": "enemy-spear-01",
+      "archetype": "spear",
       "spawn": {
-        "x": 650,
-        "y": 200
+        "x": 700,
+        "y": 270
       },
       "stats": {
-        "health": 30,
-        "damage": 8,
-        "speed": 3
-      }
-    },
-    {
-      "id": "enemy-scout-02",
-      "archetype": "scout",
-      "spawn": {
-        "x": 740,
-        "y": 330
-      },
-      "stats": {
-        "health": 30,
-        "damage": 8,
-        "speed": 3
+        "health": 80,
+        "damage": 10,
+        "speed": 3.4
       }
     }
   ]

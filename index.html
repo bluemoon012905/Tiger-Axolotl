@@ -106,9 +106,23 @@
           <div class="tutorial-topbar">
             <div class="tutorial-meta">
               <span class="tutorial-chip">Tutorial Active</span>
-              <span class="tutorial-chip tutorial-chip-muted">Room Prototype</span>
+              <span id="tutorial-room-chip" class="tutorial-chip tutorial-chip-muted">Room Prototype</span>
+              <span id="tutorial-state-chip" class="tutorial-chip tutorial-chip-muted">Awaiting load</span>
             </div>
             <div class="tutorial-actions">
+              <button
+                type="button"
+                class="icon-button"
+                data-action="open-settings"
+                aria-haspopup="dialog"
+                aria-controls="tutorial-settings"
+                aria-expanded="false"
+                aria-label="Open keybind settings"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M19.14 12.94a7.43 7.43 0 0 0 .05-.94 7.43 7.43 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.28 7.28 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.49-.42h-3.84a.5.5 0 0 0-.49.42l-.36 2.54a7.28 7.28 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.43 7.43 0 0 0-.05.94 7.43 7.43 0 0 0 .05.94L2.82 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.39 1.05.71 1.63.94l.36 2.54a.5.5 0 0 0 .49.42h3.84a.5.5 0 0 0 .49-.42l.36-2.54c.58-.23 1.13-.55 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64ZM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z"></path>
+                </svg>
+              </button>
               <button type="button" class="ghost-button" data-action="toggle-fullscreen">
                 Full Screen
               </button>
@@ -116,6 +130,31 @@
             </div>
           </div>
           <canvas id="stage" width="960" height="540" aria-label="Game stage"></canvas>
+          <section
+            id="tutorial-settings"
+            class="settings-panel"
+            aria-label="Keybind settings"
+            hidden
+          >
+            <div class="settings-header">
+              <div>
+                <p class="screen-kicker">Controls</p>
+                <h3>Keybind Settings</h3>
+              </div>
+              <button type="button" class="ghost-button" data-action="close-settings">Close</button>
+            </div>
+            <p id="settings-status" class="settings-copy">
+              Defaults are saved locally. Select any action to rebind it.
+            </p>
+            <div id="keybind-list" class="keybind-list"></div>
+            <div class="settings-actions">
+              <button type="button" class="ghost-button" data-action="reset-keybinds">Reset Defaults</button>
+            </div>
+          </section>
+          <section class="info-panel" aria-label="Runtime summary">
+            <p id="status" class="status-copy"></p>
+            <dl id="summary" class="summary-grid"></dl>
+          </section>
         </div>
       </section>
     </section>

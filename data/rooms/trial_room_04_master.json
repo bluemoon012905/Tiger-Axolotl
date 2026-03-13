@@ -1,0 +1,26 @@
+{
+  "id": "trial-room-04-master",
+  "name": "Master Trial",
+  "objective": "Survive the exam room and defeat the master golem.",
+  "bounds": {
+    "x": 80,
+    "y": 80,
+    "width": 800,
+    "height": 380
+  },
+  "enemies": [
+    {
+      "id": "enemy-master-01",
+      "archetype": "master",
+      "spawn": {
+        "x": 730,
+        "y": 270
+      },
+      "stats": {
+        "health": 180,
+        "damage": 14,
+        "speed": 3
+      }
+    }
+  ]
+}

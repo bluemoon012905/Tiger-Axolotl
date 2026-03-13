@@ -1,0 +1,26 @@
+{
+  "id": "trial-room-03",
+  "name": "Magic Trial",
+  "objective": "Read the cast telegraph and punish the staff golem between blasts.",
+  "bounds": {
+    "x": 80,
+    "y": 80,
+    "width": 800,
+    "height": 380
+  },
+  "enemies": [
+    {
+      "id": "enemy-staff-01",
+      "archetype": "staff",
+      "spawn": {
+        "x": 700,
+        "y": 320
+      },
+      "stats": {
+        "health": 95,
+        "damage": 12,
+        "speed": 2.4
+      }
+    }
+  ]
+}
